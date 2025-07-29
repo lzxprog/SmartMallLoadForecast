@@ -104,6 +104,4 @@ python main.py
 
 完整依赖请查看 [`environment.yml`](./environment.yml)
 
-*本项目可作为管理科学、电力系统建模、数据挖掘等课程论文或实际应用案例的参考。*
-
 ```
