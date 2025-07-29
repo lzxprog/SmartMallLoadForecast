@@ -1,9 +1,4 @@
-下面是一个完整 Python 项目的 **README.md** 模板，适用于你的负荷预测工程。内容说明项目结构、安装依赖、运行方式，以及数据格式要求。你可以直接复制粘贴到你的项目根目录。
-
----
-
-
-# Commercial Building Electricity Load Forecast
+# SmartMallLoadForecast
 
 ### 基于 XGBoost 的商业建筑用电负荷预测（以某大型商场为例）
 
@@ -19,19 +14,17 @@
 
 ```
 
-load\_forecast/
+SmartMallLoadForecast/
 │
-├── data/
-│   └── your\_file.csv            # 存放原始负荷数据
-│
+├── environment.yml
+├── README.md
+├── data/                  # 被 .gitignore 忽略
+│    └── your_file.csv
 ├── src/
-│   ├── data\_processing.py       # 数据读取、节假日 & 天气特征处理脚本
-│   ├── feature\_engineering.py   # 滑动窗口与特征构建函数
-│   ├── model\_train.py           # XGBoost 模型训练与滚动验证
-│   └── visualize.py             # 结果可视化脚本（预测 vs 实际 & 特征重要性）
-│
-├── README.md                    # 本说明文件
-├── requirements.txt            # Python 依赖列表
+│   ├── data_processing.py
+│   ├── feature_engineering.py
+│   ├── model_train.py
+│   └── visualize.py
 └── .gitignore
 
 ````
