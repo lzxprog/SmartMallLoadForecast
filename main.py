@@ -42,6 +42,7 @@ def main():
     visualize.plot_load_vs_pred(y_true, y_pred, df_full.index, output_dir='data/results')
     visualize.plot_scatter_actual_pred(y_true, y_pred, output_dir='data/results')
     visualize.plot_feature_importance(final_model, feat_cols, output_dir='data/results')
+    visualize.plot_residual_distribution(y_true, y_pred, output_dir='data/results')
 
     print("====== Pipeline Completed Successfully ======")
 
