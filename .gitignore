@@ -1,0 +1,30 @@
+# 忽略数据目录下所有内容
+/data/*
+
+# 允许保留空目录结构（如果需要）
+!/data/.gitkeep
+
+# 忽略 Python 缓存文件
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 忽略虚拟环境目录（根据你的项目适配）
+venv/
+.env/
+env/
+*.env
+
+# 忽略输出图表、模型、日志等
+*.pkl
+*.joblib
+*.h5
+*.png
+*.jpg
+*.svg
+*.log
+
+# 忽略临时文件和操作系统生成内容
+*.DS_Store
+Thumbs.db
+*.tmp
