@@ -8,6 +8,10 @@ import joblib
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 from pathlib import Path
 
+# 设置中文字体（确保系统支持，如 Windows 使用 Microsoft YaHei，Mac 可用 Heiti TC）
+plt.rcParams['font.family'] = 'Microsoft YaHei'
+plt.rcParams['axes.unicode_minus'] = False  # 解决负号显示问题
+
 
 def load_results(samples_path='data/samples/samples.csv', model_path='data/results/xgb_final_model.joblib'):
     """
@@ -44,11 +48,11 @@ def plot_load_vs_pred(y_true, y_pred, time_index, output_dir='data/results'):
     """
     Path(output_dir).mkdir(parents=True, exist_ok=True)
     plt.figure(figsize=(14, 5))
-    plt.plot(time_index, y_true, label='Actual', linewidth=1.5)
-    plt.plot(time_index, y_pred, label='Predicted', linewidth=1.5)
-    plt.title('Actual vs Predicted Load')
-    plt.xlabel('Time')
-    plt.ylabel('Load (kW)')
+    plt.plot(time_index, y_true, label='实际值', linewidth=1.5)
+    plt.plot(time_index, y_pred, label='预测值', linewidth=1.5)
+    plt.title('实际负荷 vs 预测负荷')
+    plt.xlabel('时间')
+    plt.ylabel('负荷 (kW)')
     plt.legend()
     plt.grid(True)
     plt.tight_layout()
@@ -65,9 +69,9 @@ def plot_scatter_actual_pred(y_true, y_pred, output_dir='data/results'):
     Path(output_dir).mkdir(parents=True, exist_ok=True)
     plt.figure(figsize=(6, 6))
     sns.regplot(x=y_true, y=y_pred, scatter_kws={"s": 10, "alpha": 0.6}, line_kws={"color": "red"})
-    plt.xlabel("Actual Load")
-    plt.ylabel("Predicted Load")
-    plt.title("Scatter: Actual vs Predicted")
+    plt.xlabel("实际负荷")
+    plt.ylabel("预测负荷")
+    plt.title("散点图：实际值 vs 预测值")
     plt.grid(True)
     plt.tight_layout()
     out_path = f"{output_dir}/scatter_actual_pred.png"
@@ -87,7 +91,7 @@ def plot_feature_importance(model, feature_names, output_dir='data/results'):
     plt.figure(figsize=(10, 6))
     plt.barh(np.array(feature_names)[sorted_idx], importance[sorted_idx])
     plt.gca().invert_yaxis()
-    plt.title('Feature Importance')
+    plt.title('特征重要性')
     plt.tight_layout()
     out_path = f"{output_dir}/feature_importance_visual.png"
     plt.savefig(out_path)

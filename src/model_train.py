@@ -8,6 +8,10 @@ from xgboost import XGBRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 import joblib
 
+# 设置中文显示
+plt.rcParams['font.family'] = 'Microsoft YaHei'  # 或者 'SimHei'，根据系统字体
+plt.rcParams['axes.unicode_minus'] = False
+
 
 def load_samples(path='data/samples/samples.csv'):
     """
@@ -53,7 +57,7 @@ def evaluate(y_true, y_pred):
     """
     mae = mean_absolute_error(y_true, y_pred)
     rmse = np.sqrt(mean_squared_error(y_true, y_pred))
-    print(f"[Metrics] ✅ MAE: {mae:.3f}, RMSE: {rmse:.3f}")
+    print(f"[评估] ✅ MAE: {mae:.3f}, RMSE: {rmse:.3f}")
     return mae, rmse
 
 
@@ -63,16 +67,17 @@ def plot_results(y_true, y_pred, output_dir='data/results'):
     """
     Path(output_dir).mkdir(parents=True, exist_ok=True)
     plt.figure(figsize=(12, 5))
-    plt.plot(y_true, label='Actual')
-    plt.plot(y_pred, label='Predicted')
-    plt.title('Actual vs Predicted Load')
-    plt.xlabel('Time Steps')
-    plt.ylabel('Load')
+    plt.plot(y_true, label='实际值')
+    plt.plot(y_pred, label='预测值')
+    plt.title('实际值 vs 预测值')
+    plt.xlabel('时间步')
+    plt.ylabel('负荷（kW）')
     plt.legend()
     plt.tight_layout()
-    plt.savefig(f"{output_dir}/actual_vs_pred.png")
+    save_path = f"{output_dir}/actual_vs_pred.png"
+    plt.savefig(save_path)
     plt.close()
-    print(f"[Plot] 📊 已保存预测对比图：{output_dir}/actual_vs_pred.png")
+    print(f"[图表] 📊 已保存预测对比图：{save_path}")
 
 
 def plot_feature_importance(model, feature_names, output_dir='data/results'):
@@ -86,11 +91,13 @@ def plot_feature_importance(model, feature_names, output_dir='data/results'):
     plt.figure(figsize=(10, 6))
     plt.barh(np.array(feature_names)[sorted_idx], importance[sorted_idx])
     plt.gca().invert_yaxis()
-    plt.title('Feature Importance')
+    plt.title('特征重要性')
+    plt.xlabel('重要性得分')
     plt.tight_layout()
-    plt.savefig(f"{output_dir}/feature_importance.png")
+    save_path = f"{output_dir}/feature_importance.png"
+    plt.savefig(save_path)
     plt.close()
-    print(f"[Plot] 📊 已保存特征重要性图：{output_dir}/feature_importance.png")
+    print(f"[图表] 📊 已保存特征重要性图：{save_path}")
 
 
 def save_model(model, path='data/results/xgb_model.joblib'):
@@ -99,7 +106,7 @@ def save_model(model, path='data/results/xgb_model.joblib'):
     """
     Path(path).parent.mkdir(parents=True, exist_ok=True)
     joblib.dump(model, path)
-    print(f"[Model] 💾 模型已保存至：{path}")
+    print(f"[模型] 💾 模型已保存至：{path}")
 
 
 def load_model(path='data/results/xgb_model.joblib'):
